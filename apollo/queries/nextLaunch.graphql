@@ -1,0 +1,8 @@
+query NextLaunches {
+  launchNext {
+    details
+  }
+  roadster {
+    details
+  }
+}

@@ -3,13 +3,33 @@
     <article>
       <h1>title</h1>
       <p class="body">some text stay tuned for real news</p>
+      <p v-if="launchNext">{{ launchNext.details }}</p>
     </article>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-export default Vue.extend({})
+import { Vue, Component } from 'vue-property-decorator'
+// TODO needs to be imported somewhere so the types for Vue get patched
+// why is the nuxt apollo module not solving this?
+import 'vue-apollo'
+
+import NextLaunchQuery from '~/apollo/queries/nextLaunch.graphql'
+import { NextLaunchesQuery } from '~/types/types'
+
+@Component({
+  apollo: {
+    launchNext: {
+      query: NextLaunchQuery,
+    },
+  },
+})
+export default class PostPage extends Vue {
+  launchNext: NextLaunchesQuery['launchNext'] | null = null
+  get testDate() {
+    return this.launchNext && this.launchNext.details
+  }
+}
 </script>
 
 <style scoped></style>

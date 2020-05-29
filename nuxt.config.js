@@ -52,7 +52,7 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'https://api.spacex.land/',
+        httpEndpoint: 'https://api.spacex.land/graphql',
       },
     },
   },
