@@ -1,9 +1,9 @@
 <template>
   <div class="launch-card">
     <img
-      v-if="launch.links.flickr_images[0]"
+      v-if="launch.links.flickr_images[0] || launch.links.mission_patch"
       class="header-image"
-      :src="launch.links.flickr_images[0]"
+      :src="launch.links.flickr_images[0] || launch.links.mission_patch"
       :alt="launch.mission_name"
     />
     <div class="title">
@@ -12,7 +12,7 @@
       <div class="tags"></div>
     </div>
     <p>{{ launchDate }}</p>
-    <p class="intro"></p>
+    <p class="intro">{{ launch.details }}</p>
   </div>
 </template>
 
@@ -42,6 +42,16 @@ export default class extends Vue {
   padding: 8px;
 }
 .header-image {
+  width: 100%;
   height: 150px;
+  object-fit: contain;
+  background: black;
+}
+.intro {
+  overflow: hidden;
+  // multiline elipis see https://css-tricks.com/line-clampin/#weird-webkit-flexbox-way
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 </style>

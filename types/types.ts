@@ -1326,7 +1326,7 @@ export type LaunchesQuery = (
   { __typename?: 'Query' }
   & { launches?: Maybe<Array<Maybe<(
     { __typename?: 'Launch' }
-    & Pick<Launch, 'id' | 'mission_name' | 'mission_id' | 'launch_date_utc'>
+    & Pick<Launch, 'id' | 'details' | 'mission_name' | 'mission_id' | 'launch_date_utc'>
     & { rocket?: Maybe<(
       { __typename?: 'LaunchRocket' }
       & { rocket?: Maybe<(
@@ -1335,7 +1335,7 @@ export type LaunchesQuery = (
       )> }
     )>, links?: Maybe<(
       { __typename?: 'LaunchLinks' }
-      & Pick<LaunchLinks, 'flickr_images' | 'video_link' | 'wikipedia' | 'article_link'>
+      & Pick<LaunchLinks, 'flickr_images' | 'video_link' | 'wikipedia' | 'article_link' | 'mission_patch'>
     )> }
   )>>> }
 );

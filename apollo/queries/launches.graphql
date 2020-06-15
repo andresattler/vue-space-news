@@ -10,6 +10,7 @@ query Launches($offset: Int!) {
         boosters
       }
     }
+    details
     mission_name
     mission_id
     links {
@@ -17,6 +18,7 @@ query Launches($offset: Int!) {
       video_link
       wikipedia
       article_link
+      mission_patch
     }
     launch_date_utc
   }

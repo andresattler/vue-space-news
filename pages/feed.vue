@@ -1,13 +1,14 @@
 <template>
   <div class="launch-feed">
-    <LaunchCard v-for="launch in launches" :launch="launch" :key="launch.id" />
-    <button @click="fetchMore">Load next</button>
+    <LaunchCard v-for="launch in launches" :key="launch.id" :launch="launch" />
+    <LoadingSentinel @inView="handlePageEnd" />
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import LaunchCard from '@/components/LaunchCard.vue'
+import LoadingSentinel from '@/components/LoadingSentinel.vue'
 import 'vue-apollo'
 
 import launchesQuery from '~/apollo/queries/launches.graphql'
@@ -16,6 +17,7 @@ import { LaunchesQuery } from '~/types/types'
 @Component({
   components: {
     LaunchCard,
+    LoadingSentinel,
   },
   apollo: {
     launches: {
@@ -29,6 +31,12 @@ import { LaunchesQuery } from '~/types/types'
 export default class LaunchFeed extends Vue {
   launches: LaunchesQuery['launches'] = []
   page: number = 0
+  handlePageEnd() {
+    if (!this.$apollo.queries.launches.loading) {
+      this.fetchMore()
+    }
+  }
+
   fetchMore() {
     this.page++
     this.$apollo.queries.launches.fetchMore({
@@ -41,7 +49,10 @@ export default class LaunchFeed extends Vue {
       ): LaunchesQuery {
         return {
           ...previousResult,
-          launches: [...previousResult.launches, ...fetchMoreResult.launches],
+          launches: [
+            ...(previousResult.launches || []),
+            ...fetchMoreResult.launches,
+          ],
         }
       },
     })
