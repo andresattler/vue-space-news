@@ -1,7 +1,8 @@
 <template>
   <nav class="nav">
     <n-link to="/">Home</n-link>
-    <n-link to="/post">Post</n-link>
+    <n-link to="/next-launch">Next Launch</n-link>
+    <n-link to="/feed">Feed</n-link>
   </nav>
 </template>
 

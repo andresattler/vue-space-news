@@ -1,0 +1,23 @@
+query Launches($offset: Int!) {
+  launches(limit: 10, sort: "launch_date_utc", order: "desc", offset: $offset) {
+    id
+    rocket {
+      rocket {
+        name
+        id
+        wikipedia
+        type
+        boosters
+      }
+    }
+    mission_name
+    mission_id
+    links {
+      flickr_images
+      video_link
+      wikipedia
+      article_link
+    }
+    launch_date_utc
+  }
+}

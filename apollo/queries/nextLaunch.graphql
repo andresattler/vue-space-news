@@ -1,8 +1,17 @@
-query NextLaunches {
-  launchNext {
-    details
-  }
-  roadster {
-    details
+query NextLaunch {
+ launchNext {
+    details,
+    launch_site {
+      site_name_long
+    }
+    launch_date_unix,
+    mission_name
+    rocket {
+      rocket_name
+      rocket {
+        wikipedia
+        description
+      }
+    }
   }
 }

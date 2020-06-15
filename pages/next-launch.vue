@@ -14,21 +14,18 @@ import { Vue, Component } from 'vue-property-decorator'
 // why is the nuxt apollo module not solving this?
 import 'vue-apollo'
 
-import NextLaunchQuery from '~/apollo/queries/nextLaunch.graphql'
-import { NextLaunchesQuery } from '~/types/types'
+import nextLaunchQuery from '~/apollo/queries/nextLaunch.graphql'
+import { NextLaunchQuery } from '~/types/types'
 
 @Component({
   apollo: {
     launchNext: {
-      query: NextLaunchQuery,
+      query: nextLaunchQuery,
     },
   },
 })
-export default class PostPage extends Vue {
-  launchNext: NextLaunchesQuery['launchNext'] | null = null
-  get testDate() {
-    return this.launchNext && this.launchNext.details
-  }
+export default class NextLaunch extends Vue {
+  launchNext: NextLaunchQuery['launchNext'] | null = null
 }
 </script>
 

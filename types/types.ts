@@ -1317,16 +1317,47 @@ export type Volume = {
   cubic_meters?: Maybe<Scalars['Int']>;
 };
 
-export type NextLaunchesQueryVariables = {};
+export type LaunchesQueryVariables = {
+  offset: Scalars['Int'];
+};
 
 
-export type NextLaunchesQuery = (
+export type LaunchesQuery = (
+  { __typename?: 'Query' }
+  & { launches?: Maybe<Array<Maybe<(
+    { __typename?: 'Launch' }
+    & Pick<Launch, 'id' | 'mission_name' | 'mission_id' | 'launch_date_utc'>
+    & { rocket?: Maybe<(
+      { __typename?: 'LaunchRocket' }
+      & { rocket?: Maybe<(
+        { __typename?: 'Rocket' }
+        & Pick<Rocket, 'name' | 'id' | 'wikipedia' | 'type' | 'boosters'>
+      )> }
+    )>, links?: Maybe<(
+      { __typename?: 'LaunchLinks' }
+      & Pick<LaunchLinks, 'flickr_images' | 'video_link' | 'wikipedia' | 'article_link'>
+    )> }
+  )>>> }
+);
+
+export type NextLaunchQueryVariables = {};
+
+
+export type NextLaunchQuery = (
   { __typename?: 'Query' }
   & { launchNext?: Maybe<(
     { __typename?: 'Launch' }
-    & Pick<Launch, 'details'>
-  )>, roadster?: Maybe<(
-    { __typename?: 'Roadster' }
-    & Pick<Roadster, 'details'>
+    & Pick<Launch, 'details' | 'launch_date_unix' | 'mission_name'>
+    & { launch_site?: Maybe<(
+      { __typename?: 'LaunchSite' }
+      & Pick<LaunchSite, 'site_name_long'>
+    )>, rocket?: Maybe<(
+      { __typename?: 'LaunchRocket' }
+      & Pick<LaunchRocket, 'rocket_name'>
+      & { rocket?: Maybe<(
+        { __typename?: 'Rocket' }
+        & Pick<Rocket, 'wikipedia' | 'description'>
+      )> }
+    )> }
   )> }
 );
